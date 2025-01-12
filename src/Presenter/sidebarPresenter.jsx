@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../Redux/Modal/modalSlice.js";
 import { useNavigate } from "react-router-dom";
 
-export function SidbarPresenter() {
+export function SidebarPresenter() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const dispatch = useDispatch();
   const sidebar = useSelector((state) => state.modal.isSidebarOpen);
@@ -27,8 +27,8 @@ export function SidbarPresenter() {
       windowSize={windowSize}
       sidebar={sidebar}
       onToggleSidebar={handleToggleSidebar}
-      onClickLinkedRecipe={() => navigate("/recipes")}
-      onClickProfile={() => navigate("/Profile")}
+      onClickLinkedRecipe={() => navigate("/liked-recipes")}
+      onClickProfile={() => navigate("/profile")}
     />
   );
 

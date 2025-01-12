@@ -1,0 +1,71 @@
+:root {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-size: 16px;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /*CSS Variabels*/
+  /* color-scheme: light dark; */
+  --background-color: linear-gradient(
+    to right,
+    rgba(106, 17, 203, 0.2),
+    rgba(37, 117, 252, 0.2)
+  );
+  --primary-color: #646cff;
+  --secondary-color: #535bf2;
+  --text-color: #ffffff;
+  --border-color: #ccc;
+  --link-color: #646cff;
+  --link-hover-color: #535bf2;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0rem;
+  padding: 0rem;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--background-color);
+}
+
+/*Div in index file that get injected with the app */
+#root {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  width: 6rem;
+  height: 2.5rem;
+  color: var(--text-color);
+  font-weight: bold;
+  background-color: #646cff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+}
