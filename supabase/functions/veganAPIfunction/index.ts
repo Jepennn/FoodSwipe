@@ -6,6 +6,8 @@
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
+import { corsHeaders } from "../_shared/cors.ts";
+
 //API keys for the vegan API
 const apiKeyVegan = Deno.env.get("API_KEY_VEGAN");
 const apiHostVegan = Deno.env.get("API_HOST_VEGAN");
@@ -17,15 +19,21 @@ Deno.serve(async (req) => {
     const options = {
       method: "GET",
       headers: {
+        ...corsHeaders,
         "x-rapidapi-key": apiKeyVegan,
         "x-rapidapi-host": apiHostVegan,
       },
     };
 
-    // Gör förfrågan till API:et
+    // Return CORS headers on preflight requests
+    if (req.method === "OPTIONS") {
+      return new Response("OK", { headers: corsHeaders });
+    }
+
+    // If the request is not preflight, fetch data from the vegan API
     const response = await fetch(url, options);
 
-    // Kontrollera om svaret är lyckat
+    // Checks so response is OK from the vegan API
     if (!response.ok) {
       return new Response(
         JSON.stringify({
@@ -38,14 +46,23 @@ Deno.serve(async (req) => {
     // Läs API:ets svar och returnera det som JSON
     const result = await response.json();
 
+    // Return the response from the vegan API if successful
     return new Response(JSON.stringify(result), {
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        ...corsHeaders,
+        "Content-Type": "application/json",
+      },
     });
+
+    // Catch and handle errors
   } catch (error) {
     console.error("Error fetching from the Vegan API:", error);
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        ...corsHeaders,
+        "Content-Type": "application/json",
+      },
     });
   }
 });
