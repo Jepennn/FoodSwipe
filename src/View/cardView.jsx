@@ -1,14 +1,10 @@
 import styles from "./cardView.module.css";
 
-export function CardView() {
+export function CardView({ foodImage, foodTitle }) {
   return (
     <>
-      <img
-        className={styles.dish_image}
-        src="/vegan3.jpg"
-        alt="image of food"
-      />
-      <h3 className={styles.dish_title}>Vegan stew with beetroot</h3>
+      <img className={styles.dish_image} src={foodImage} alt="image of food" />
+      <h1 className={styles.dish_title}>{foodTitle}</h1>
     </>
   );
 }
