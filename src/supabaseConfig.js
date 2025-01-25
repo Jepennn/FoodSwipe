@@ -5,4 +5,5 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
+//This is just for development purposes to be able to access the auth object in the console
 window.auth = supabase.auth;

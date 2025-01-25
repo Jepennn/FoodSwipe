@@ -11,6 +11,7 @@ import { corsHeaders } from "../_shared/cors.ts";
 //API keys for the vegan API
 const apiKeyVegan = Deno.env.get("API_KEY_VEGAN");
 const apiHostVegan = Deno.env.get("API_HOST_VEGAN");
+const apiHostChinese = Deno.env.get("API_HOST_CHINESE");
 
 //Function to handle request for vegan API
 Deno.serve(async (req) => {
@@ -21,7 +22,7 @@ Deno.serve(async (req) => {
       headers: {
         ...corsHeaders,
         "x-rapidapi-key": apiKeyVegan,
-        "x-rapidapi-host": apiHostVegan,
+        "x-rapidapi-host": apiHostChinese,
       },
     };
 
@@ -39,7 +40,14 @@ Deno.serve(async (req) => {
         JSON.stringify({
           error: "Failed to fetch data from the vegan API",
           status: response.status,
-        })
+        }),
+        {
+          status: response.status,
+          headers: {
+            ...corsHeaders,
+            "Content-Type": "application/json",
+          },
+        }
       );
     }
 
