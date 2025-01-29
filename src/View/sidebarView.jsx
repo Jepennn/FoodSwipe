@@ -2,7 +2,12 @@ import { IoLogOut, IoHeart } from "react-icons/io5";
 import { FaUser } from "react-icons/fa";
 import styles from "./sidebarView.module.css";
 
-export function SidebarView({ sidebar, onClickLinkedRecipe, onClickProfile }) {
+export function SidebarView({
+  sidebar,
+  onClickLinkedRecipe,
+  onClickProfile,
+  onClickFoodSwipeHeader,
+}) {
   if (!sidebar) {
     return null;
   }
@@ -10,7 +15,7 @@ export function SidebarView({ sidebar, onClickLinkedRecipe, onClickProfile }) {
   if (sidebar) {
     return (
       <div className={styles.sidebar_container}>
-        <h1>FoodSwipe</h1>
+        <h1 onClick={onClickFoodSwipeHeader}>FoodSwipe</h1>
         <div className={styles.path_contianer} onClick={onClickProfile}>
           <FaUser size={22} />
           <span>Profile</span>

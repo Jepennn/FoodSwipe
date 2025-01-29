@@ -26,6 +26,7 @@ export function SidebarPresenter() {
     <SidebarView
       windowSize={windowSize}
       sidebar={sidebar}
+      onClickFoodSwipeHeader={() => navigate("/recipeSwipe")}
       onToggleSidebar={handleToggleSidebar}
       onClickLinkedRecipe={() => navigate("/liked-recipes")}
       onClickProfile={() => navigate("/profile")}
