@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar } from "../Redux/Modal/modalSlice.js";
 import { useNavigate } from "react-router-dom";
+import { logoutUserThunk } from "../Redux/Auth/logoutUserThunk.js";
 
 export function SidebarPresenter() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -10,6 +11,7 @@ export function SidebarPresenter() {
   const sidebar = useSelector((state) => state.modal.isSidebarOpen);
   const navigate = useNavigate();
 
+  //Handles window resize and closes sidebar if window size is less than 768px
   useEffect(() => {
     function handleResize() {
       setWindowSize(window.innerWidth);
@@ -22,18 +24,19 @@ export function SidebarPresenter() {
     return () => window.removeEventListener("resize", handleResize);
   }, [windowSize, sidebar, dispatch]);
 
+  function onHandleLogout() {
+    dispatch(logoutUserThunk());
+    navigate("/");
+  }
+
   return (
     <SidebarView
-      windowSize={windowSize}
       sidebar={sidebar}
       onClickFoodSwipeHeader={() => navigate("/recipeSwipe")}
-      onToggleSidebar={handleToggleSidebar}
+      onToggleSidebar={() => dispatch(toggleSidebar())}
       onClickLinkedRecipe={() => navigate("/liked-recipes")}
       onClickProfile={() => navigate("/profile")}
+      onClickLogout={onHandleLogout}
     />
   );
-
-  function handleToggleSidebar() {
-    dispatch(toggleSidebar());
-  }
 }
