@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 //Importing Thunks for user authentication
 import { createUserThunk } from "./createUserThunk";
 import { loginUserThunk } from "./loginUserThunk";
+import { logoutUserThunk } from "./logoutUserThunk";
 
 const initialState = {
   isAuth: false,
@@ -52,6 +53,23 @@ const authSlice = createSlice({
         state.userId = null;
         state.email = null;
         state.error = action.payload;
+      })
+      //Logout User thunk reducers
+      .addCase(logoutUserThunk.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUserThunk.fulfilled, (state) => {
+        state.isAuth = false;
+        state.userId = null;
+        state.email = null;
+        state.first_name = null;
+        state.last_name = null;
+        state.loading = false;
+      })
+      .addCase(logoutUserThunk.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
       });
   },
 });

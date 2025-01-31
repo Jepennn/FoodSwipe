@@ -7,6 +7,7 @@ export function SidebarView({
   onClickLinkedRecipe,
   onClickProfile,
   onClickFoodSwipeHeader,
+  onClickLogout,
 }) {
   if (!sidebar) {
     return null;
@@ -24,7 +25,7 @@ export function SidebarView({
           <IoHeart size={22} />
           <span>Liked receipes</span>
         </div>
-        <div className={styles.path_contianer}>
+        <div className={styles.path_contianer} onClick={onClickLogout}>
           <IoLogOut size={25} />
           <span>Log out</span>
         </div>
