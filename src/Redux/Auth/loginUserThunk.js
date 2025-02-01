@@ -13,7 +13,6 @@ export const loginUserThunk = createAsyncThunk(
       return thunkAPI.rejectWithValue(error.message);
     }
 
-    console.log(data.user);
     return data.user;
   }
 );

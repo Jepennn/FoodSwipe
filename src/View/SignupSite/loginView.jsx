@@ -9,7 +9,6 @@ export function LoginView({ onLoginUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle login logic here
     onLoginUser(email, password);
   };
 
@@ -17,7 +16,7 @@ export function LoginView({ onLoginUser }) {
     <div className={styles.loginContainer}>
       <div className={styles.container}>
         <h1 className={styles.heading}>Login</h1>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form}>
           <input
             type="email"
             className={styles.input}
@@ -32,7 +31,11 @@ export function LoginView({ onLoginUser }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" className={styles.login_button}>
+          <button
+            type="submit"
+            className={styles.login_button}
+            onClick={handleSubmit}
+          >
             Login
           </button>
         </form>
