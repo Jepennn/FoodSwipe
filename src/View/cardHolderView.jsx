@@ -1,13 +1,14 @@
 import { useEffect, useRef } from "react";
 import { FiThumbsDown, FiHeart } from "react-icons/fi";
-import { Link } from "react-router-dom";
 import styles from "./cardHolder.module.css";
 
 export function CardHolderView({
   children,
-  onHandleFlip,
+  onClickFlipCard,
   isCardFlipped,
   currentRecipe,
+  onClickLikeRecipe,
+  onClickDislikedRecipe,
 }) {
   const videoRef = useRef(null);
   useEffect(() => {
@@ -40,17 +41,23 @@ export function CardHolderView({
       <div className={styles.cardHolder_container}>
         <div
           className={`${styles.card} ${isCardFlipped ? styles.is_flipped : ""}`}
-          onClick={onHandleFlip}
+          onClick={onClickFlipCard}
         >
           {/* Front of recipe card*/}
           <div className={styles.card_front}>
             <div className={styles.card_content_front}>{children}</div>
 
             <div className={styles.button_container}>
-              <div className={styles.div_button}>
+              <div
+                onClick={onClickDislikedRecipe}
+                className={styles.div_button}
+              >
                 <FiThumbsDown size={55} />
               </div>
-              <div className={`${styles.div_button} ${styles.div_button_like}`}>
+              <div
+                onClick={onClickLikeRecipe}
+                className={`${styles.div_button} ${styles.div_button_like}`}
+              >
                 <FiHeart size={55} />
               </div>
             </div>
