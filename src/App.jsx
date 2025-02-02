@@ -6,6 +6,7 @@ import { SidebarViewRightButtonTopPresenter } from "./Presenter/sidebarViewRight
 //Components imported for Signup site
 import { HeaderPresenter } from "./Presenter/SignupPresenters/headerPresenter.jsx";
 import { LoginPresenter } from "./Presenter/SignupPresenters/loginPresenter.jsx";
+import { LikedRecipePresenter } from "./Presenter/likedRecipePresenter.jsx";
 
 //import for protected routes
 import { Protect } from "./Utilities/protect.jsx";
@@ -43,16 +44,8 @@ export default function App() {
             element={
               <Protect>
                 <SidebarPresenter />
-                <div>This is the linked recipe section</div>
-              </Protect>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <Protect>
-                <SidebarPresenter />
-                <div>This is the profile section</div>
+                <LikedRecipePresenter />
+                <SidebarViewRightButtonTopPresenter />
               </Protect>
             }
           />

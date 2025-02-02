@@ -1,5 +1,5 @@
 import { IoLogOut, IoHeart } from "react-icons/io5";
-import { FaUser } from "react-icons/fa";
+import { MdSwipeRight } from "react-icons/md";
 import styles from "./sidebarView.module.css";
 
 export function SidebarView({
@@ -18,8 +18,8 @@ export function SidebarView({
       <div className={styles.sidebar_container}>
         <h1 onClick={onClickFoodSwipeHeader}>FoodSwipe</h1>
         <div className={styles.path_contianer} onClick={onClickProfile}>
-          <FaUser size={22} />
-          <span>Profile</span>
+          <MdSwipeRight size={22} />
+          <span>inspiration</span>
         </div>
         <div className={styles.path_contianer} onClick={onClickLinkedRecipe}>
           <IoHeart size={22} />
