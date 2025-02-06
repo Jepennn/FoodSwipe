@@ -26,7 +26,8 @@ store.subscribe(() => {
   //State to be saved in the session storage
   const stateToBeSaved = {
     auth: storeState.auth,
-    likedRecipe: storeState.recipe.likedRecipes,
+    modal: storeState.modal,
+    recipe: storeState.recipe,
   };
 
   saveToSessionStorage(stateToBeSaved);
