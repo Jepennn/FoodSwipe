@@ -1,8 +1,16 @@
 import styles from "./likedRecipeView.module.css";
-// import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { SmallCardMoreInfo } from "../Utilities/smallCardMoreInfo.jsx";
+import { useSelector } from "react-redux";
+// import { SmallCardComp } from "../Utilities/smallCardComp.jsx";
 
-export function LikedRecipeView() {
-  //   const likedRecipes = useSelector((state) => state.likedRecipes);
+export function LikedRecipeView({ onLoadInLikedRecipe }) {
+  const likedRecipes = useSelector((state) => state.recipe.likedRecipes);
+
+  //Load in liked recipes when component is mounted
+  useEffect(() => {
+    onLoadInLikedRecipe();
+  }, [onLoadInLikedRecipe]);
 
   return (
     <div className={styles.liked_recipe_container}>
@@ -10,12 +18,9 @@ export function LikedRecipeView() {
         <h1>Recipe collection</h1>
       </div>
       <div className={styles.recipe_wraper}>
-        <div className={styles.liked_recipe_card}></div>
-        <div className={styles.liked_recipe_card}></div>
-        <div className={styles.liked_recipe_card}></div>
-        <div className={styles.liked_recipe_card}></div>
-        <div className={styles.liked_recipe_card}></div>
-        <div className={styles.liked_recipe_card}></div>
+        {likedRecipes.map((recipe) => {
+          return <SmallCardMoreInfo key={recipe.id} data={recipe} />;
+        })}
       </div>
     </div>
   );

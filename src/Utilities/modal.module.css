@@ -1,0 +1,28 @@
+.modal {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2000;
+
+  width: 35rem;
+  height: 35rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  overflow-y: scroll;
+  scrollbar-color: #ffffff7d transparent;
+  scrollbar-width: thin;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}

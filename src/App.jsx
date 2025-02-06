@@ -2,6 +2,7 @@
 import { SidebarPresenter } from "./Presenter/sidebarPresenter.jsx";
 import { CardHolderPresenter } from "./Presenter/cardHolderPresenter.jsx";
 import { SidebarViewRightButtonTopPresenter } from "./Presenter/sidebarViewRightButtonTopPresenter.jsx";
+import { MoreDetailsRecipePresenter } from "./Presenter/moreDetailsRecipePresenter.jsx";
 
 //Components imported for Signup site
 import { HeaderPresenter } from "./Presenter/SignupPresenters/headerPresenter.jsx";
@@ -43,6 +44,17 @@ export default function App() {
             path="/liked-recipes"
             element={
               <Protect>
+                <SidebarPresenter />
+                <LikedRecipePresenter />
+                <SidebarViewRightButtonTopPresenter />
+              </Protect>
+            }
+          />
+          <Route
+            path="/liked-recipes/:id"
+            element={
+              <Protect>
+                <MoreDetailsRecipePresenter />
                 <SidebarPresenter />
                 <LikedRecipePresenter />
                 <SidebarViewRightButtonTopPresenter />

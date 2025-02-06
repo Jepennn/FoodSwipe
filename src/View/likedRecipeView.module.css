@@ -20,6 +20,7 @@
 .recipe_wraper {
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 2;
   padding: 1rem 0rem 0rem 2rem;
   justify-content: left;
   gap: 1.5rem;

@@ -12,6 +12,7 @@ export function CardHolderView({
 }) {
   const videoRef = useRef(null);
   useEffect(() => {
+    //Creates an observer to check if the video is in view and plays it if it is
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -29,6 +30,7 @@ export function CardHolderView({
       observer.observe(videoRef.current);
     }
 
+    //Cleans up the observer before the component unmounts
     return () => {
       if (videoRef.current) {
         observer.unobserve(videoRef.current);

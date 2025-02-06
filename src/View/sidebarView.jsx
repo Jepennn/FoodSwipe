@@ -23,7 +23,7 @@ export function SidebarView({
         </div>
         <div className={styles.path_contianer} onClick={onClickLinkedRecipe}>
           <IoHeart size={22} />
-          <span>Liked receipes</span>
+          <span>Liked recipes</span>
         </div>
         <div className={styles.path_contianer} onClick={onClickLogout}>
           <IoLogOut size={25} />
