@@ -47,6 +47,7 @@ export function CardHolderView({
         >
           {/* Front of recipe card*/}
           <div className={styles.card_front}>
+            <p className={styles.clickMe_text}>Click me!</p>
             <div className={styles.card_content_front}>{children}</div>
 
             <div className={styles.button_container}>
