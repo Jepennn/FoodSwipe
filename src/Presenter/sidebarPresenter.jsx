@@ -36,6 +36,7 @@ export function SidebarPresenter() {
       onToggleSidebar={() => dispatch(toggleSidebar())}
       onClickLinkedRecipe={() => navigate("/liked-recipes")}
       onClickProfile={() => navigate("/recipeSwipe")}
+      onClickAi={() => navigate("/recipeAI")}
       onClickLogout={onHandleLogout}
     />
   );

@@ -53,7 +53,7 @@
 .login_button {
   width: 100%;
   font-weight: bold;
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.718);
   margin-top: 1.2rem;
   border-radius: 1rem;
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 20px 10px -15px;

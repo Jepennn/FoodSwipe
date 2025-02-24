@@ -1,4 +1,4 @@
-import { LoginView } from "../../View/SignupSite/loginView";
+import { LoginView } from "../../View/landingPageView/loginView";
 import { loginUserThunk } from "../../Redux/Auth/loginUserThunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,9 +21,5 @@ export function LoginPresenter() {
     dispatch(loginUserThunk({ email, password }));
   }
 
-  return (
-    <>
-      <LoginView onLoginUser={handleLogin} />
-    </>
-  );
+  return <>{<LoginView onLoginUser={handleLogin} />}</>;
 }

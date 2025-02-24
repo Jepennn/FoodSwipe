@@ -8,3 +8,11 @@
   background: var(--background-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+.header_container button {
+  margin-left: 0.7rem;
+}
+
+.signup_button {
+  background: #646cff54;
+}

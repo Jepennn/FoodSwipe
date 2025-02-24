@@ -73,12 +73,15 @@ button {
   height: 2.5rem;
   color: var(--text-color);
   font-weight: bold;
-  background-color: #646cff;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  border: none;
+  color: rgba(255, 255, 255, 0.718);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.05, 1.05);
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 23px 10px -20px;
+  color: #ffffff;
 }
