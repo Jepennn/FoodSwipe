@@ -21,5 +21,9 @@ export function LoginPresenter() {
     dispatch(loginUserThunk({ email, password }));
   }
 
-  return <>{<LoginView onLoginUser={handleLogin} />}</>;
+  return (
+    <>
+      <LoginView onLoginUser={handleLogin} />
+    </>
+  );
 }

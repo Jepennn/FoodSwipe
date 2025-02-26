@@ -29,7 +29,15 @@ export default function App() {
               <div className={styles.signup_site}>
                 <HeaderPresenter />
                 <MainPresenter />
-                {/* <LoginPresenter /> */}
+              </div>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <div className={styles.signup_site}>
+                <HeaderPresenter />
+                <LoginPresenter />
               </div>
             }
           />

@@ -1,16 +1,19 @@
 import { HeaderView } from "../../View/landingPageView/headerView";
-import { useDispatch } from "react-redux";
-import { toggleLoginModal } from "../../Redux/Modal/modalSlice";
+import { useNavigate } from "react-router-dom";
 
 export function HeaderPresenter() {
-  const dispatch = useDispatch();
-  function handleLoginModal() {
-    dispatch(toggleLoginModal());
-  }
+  const navigate = useNavigate();
 
   return (
     <>
-      <HeaderView onClickLoginButton={handleLoginModal} />
+      <HeaderView
+        onClickLoginButton={() => {
+          navigate("/login");
+        }}
+        onClickLogo={() => {
+          navigate("/");
+        }}
+      />
     </>
   );
 }

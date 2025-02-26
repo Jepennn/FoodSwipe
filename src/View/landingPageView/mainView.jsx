@@ -1,6 +1,6 @@
 import styles from "./mainView.module.css";
 
-export function MainView() {
+export function MainView({ onClickGetStarted }) {
   return (
     <div className={styles.mainView_container}>
       <h1 className={styles.mainView_title}>
@@ -8,7 +8,10 @@ export function MainView() {
         <br />
         next tasty dish...
       </h1>
-      <div className={styles.mainView_button_container}>
+      <div
+        onClick={onClickGetStarted}
+        className={styles.mainView_button_container}
+      >
         <button className={styles.mainView_button}>Get started now...</button>
       </div>
     </div>
