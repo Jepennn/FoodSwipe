@@ -5,7 +5,7 @@ export const fetchRecipeCollection = createAsyncThunk(
   "recipe/fetchRecipeCollection",
   async () => {
     try {
-      // const response = await VeganApiRecipes();
+      const response = await VeganApiRecipes();
       return response.results;
     } catch (error) {
       console.error(error);

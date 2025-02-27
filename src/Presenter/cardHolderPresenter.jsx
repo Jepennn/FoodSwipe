@@ -57,8 +57,8 @@ export function CardHolderPresenter() {
       onClickDislikedRecipe={handleDislikedRecipe}
     >
       <CardView
-        foodImage={currentRecipe.thumbnail_url}
-        foodTitle={currentRecipe.name}
+        foodImage={currentRecipe?.thumbnail_url}
+        foodTitle={currentRecipe?.name}
       />
     </CardHolderView>
   );

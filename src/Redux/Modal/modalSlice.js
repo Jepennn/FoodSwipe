@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isSidebarOpen: true,
   isCardFlipped: false,
-  isLoginModalOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -15,9 +14,6 @@ const modalSlice = createSlice({
     },
     toggleCardFlip: (state) => {
       state.isCardFlipped = !state.isCardFlipped;
-    },
-    toggleLoginModal: (state) => {
-      state.isLoginModalOpen = !state.isLoginModalOpen;
     },
   },
 });
