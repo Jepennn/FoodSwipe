@@ -6,9 +6,10 @@ import { MoreDetailsRecipePresenter } from "./Presenter/moreDetailsRecipePresent
 import { AiPresenter } from "./Presenter/aiPresenter.jsx";
 import { LikedRecipePresenter } from "./Presenter/likedRecipePresenter.jsx";
 
-//Components imported for Signup site
+//Components imported for landing page
 import { HeaderPresenter } from "./Presenter/landingPagePresenter/headerPresenter.jsx";
 import { LoginPresenter } from "./Presenter/landingPagePresenter/loginPresenter.jsx";
+import { SignupPresenter } from "./Presenter/landingPagePresenter/signupPresenter.jsx";
 import { MainPresenter } from "./Presenter/landingPagePresenter/mainPresenter.jsx";
 
 //import for protected routes
@@ -26,7 +27,7 @@ export default function App() {
           <Route
             path="/"
             element={
-              <div className={styles.signup_site}>
+              <div className={styles.landing_page_container}>
                 <HeaderPresenter />
                 <MainPresenter />
               </div>
@@ -35,9 +36,18 @@ export default function App() {
           <Route
             path="/login"
             element={
-              <div className={styles.signup_site}>
+              <div className={styles.landing_page_container}>
                 <HeaderPresenter />
                 <LoginPresenter />
+              </div>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <div className={styles.landing_page_container}>
+                <HeaderPresenter />
+                <SignupPresenter />
               </div>
             }
           />

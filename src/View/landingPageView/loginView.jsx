@@ -3,7 +3,7 @@ import { FaApple, FaGoogle } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export function LoginView({ onLoginUser, onSignupUser }) {
+export function LoginView({ onLoginUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

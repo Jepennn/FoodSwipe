@@ -6,8 +6,8 @@
 }
 
 .container {
-  max-width: 350px;
-  max-height: 550px;
+  max-width: 450px;
+  max-height: 650px;
   background: var(--background-color);
   border-radius: 40px;
   padding: 25px 35px;
@@ -30,12 +30,18 @@
 
 .heading {
   text-align: center;
-  font-weight: bold;
   font-size: 3rem;
 }
 
 .form {
   margin: 1rem;
+}
+
+.input_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
 }
 
 .form .input {
@@ -74,28 +80,18 @@
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 15px 10px -10px;
 }
 
-.social_account_container {
-  margin-top: 1.2rem;
-}
-
-.social_account_container .title {
-  text-align: center;
-  font-weight: bold;
-  color: var(--text-color);
-}
-
-.signup_container {
+.login_container {
   font-size: 0.8rem;
   text-align: center;
   color: var(--text-color);
 }
 
-.signup_container a {
+.login_container a {
   color: var(--link-color);
   font-weight: bold;
 }
 
-.signup_container a:hover {
+.login_container a:hover {
   color: var(--link-hover-color);
 }
 
