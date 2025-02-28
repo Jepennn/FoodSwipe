@@ -1,8 +1,9 @@
 import styles from "./loginView.module.css";
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export function LoginView({ onLoginUser }) {
+export function LoginView({ onLoginUser, onSignupUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,6 +39,9 @@ export function LoginView({ onLoginUser }) {
             Login
           </button>
         </form>
+        <div className={styles.signup_container}>
+          Don&apos;t you have an account? <Link to={"/signup"}>Sign up</Link>
+        </div>
         <div className={styles.social_account_container}>
           <div className={styles.title}></div>
           <div className={styles.social_accounts}>

@@ -14,6 +14,18 @@
   border: 5px solid rgb(255, 255, 255);
   box-shadow: rgba(133, 189, 215, 0.8784313725) 0px 30px 30px -20px;
   margin: 20px;
+  animation: slideIn 1.2s ease;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .heading {
@@ -71,6 +83,21 @@
   text-align: center;
   font-weight: bold;
   color: var(--text-color);
+}
+
+.signup_container {
+  font-size: 0.8rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.signup_container a {
+  color: var(--link-color);
+  font-weight: bold;
+}
+
+.signup_container a:hover {
+  color: var(--link-hover-color);
 }
 
 .social_button {
