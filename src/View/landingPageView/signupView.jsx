@@ -2,6 +2,7 @@ import styles from "./signupView.module.css";
 import { FaApple, FaGoogle } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 
 export function SignupView({ onClickCreateAccount }) {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ export function SignupView({ onClickCreateAccount }) {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      notify();
       return;
     }
 
@@ -28,6 +29,20 @@ export function SignupView({ onClickCreateAccount }) {
     };
 
     onClickCreateAccount(userData);
+  }
+
+  function notify() {
+    toast.error("Password do not match", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
   }
 
   return (
@@ -92,6 +107,19 @@ export function SignupView({ onClickCreateAccount }) {
           >
             Create account
           </button>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Bounce}
+          />
         </form>
         <div className={styles.login_container}>
           Already have an account? <Link to={"/login"}>Login</Link>
