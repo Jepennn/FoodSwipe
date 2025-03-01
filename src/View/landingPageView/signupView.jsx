@@ -3,13 +3,32 @@ import { FaApple, FaGoogle } from "react-icons/fa";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export function SignupView({}) {
+export function SignupView({ onClickCreateAccount }) {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [favoriteCuisine, setFavoriteCuisine] = useState("");
+
+  function createAccountHandler(e) {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const userData = {
+      name: name,
+      lastName: lastName,
+      email: email,
+      password: password,
+      favoriteCuisine: favoriteCuisine,
+    };
+
+    onClickCreateAccount(userData);
+  }
 
   return (
     <div className={styles.loginContainer}>
@@ -18,13 +37,13 @@ export function SignupView({}) {
         <form className={styles.form}>
           <div className={styles.input_container}>
             <input
-              className={styles.input}
+              className={styles.input_small}
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <input
-              className={styles.input}
+              className={styles.input_small}
               placeholder="Last name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
@@ -35,15 +54,15 @@ export function SignupView({}) {
               type="text"
               placeholder="Email"
               value={email}
-              className={styles.input}
-              onClick={(e) => {
+              className={styles.input_small}
+              onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
             <input
               type="text"
               value={favoriteCuisine}
-              className={styles.input}
+              className={styles.input_small}
               placeholder="Favorite cuisine"
               onChange={(e) => setFavoriteCuisine(e.target.value)}
             />
@@ -62,12 +81,16 @@ export function SignupView({}) {
             value={confirmPassword}
             placeholder="confirm password"
             className={styles.input}
-            onClick={(e) => {
+            onChange={(e) => {
               setConfirmPassword(e.target.value);
             }}
           />
-          <button type="submit" className={styles.login_button}>
-            Login
+          <button
+            onClick={createAccountHandler}
+            type="submit"
+            className={styles.login_button}
+          >
+            Create account
           </button>
         </form>
         <div className={styles.login_container}>

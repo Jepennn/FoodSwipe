@@ -10,6 +10,9 @@ export function HeaderPresenter() {
         onClickLoginButton={() => {
           navigate("/login");
         }}
+        onClickSignupButton={() => {
+          navigate("/signup");
+        }}
         onClickLogo={() => {
           navigate("/");
         }}
