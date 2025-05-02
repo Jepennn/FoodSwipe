@@ -31,6 +31,7 @@ export function SignupView({ onClickCreateAccount }) {
     onClickCreateAccount(userData);
   }
 
+  //Handles the toast notification when the password do not match
   function notify() {
     toast.error("Password do not match", {
       position: "bottom-right",

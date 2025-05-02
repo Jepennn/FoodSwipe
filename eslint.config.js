@@ -28,6 +28,7 @@ export default [
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
       ...reactHooks.configs.recommended.rules,
+      "max-len": "off", // I added this line to disable line length validation
       "react/jsx-no-target-blank": "off",
       "react-refresh/only-export-components": [
         "warn",

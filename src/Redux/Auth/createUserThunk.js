@@ -15,6 +15,7 @@ export const createUserThunk = createAsyncThunk(
 
       return { id, email };
     } catch (error) {
+      console.log(error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
