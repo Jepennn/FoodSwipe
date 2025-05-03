@@ -13,8 +13,9 @@ const API_KEY = Deno.env.get("API_KEY_TASTY");
 const HOST = Deno.env.get("API_HOST_TASTY");
 
 //API keys for the vegan API
-const url =
-  "https://tasty.p.rapidapi.com/recipes/list?from=0&size=39&tags=under_30_minutes";
+const url ="https://tasty.p.rapidapi.com/recipes/list?from=0&size=39&tags=under_30_minutes";
+
+
 const options = {
   method: "GET",
   headers: {
@@ -25,8 +26,6 @@ const options = {
 
 //Function to handle request to Tasty API
 Deno.serve(async (req) => {
-  console.log(API_KEY);
-  console.log(HOST);
 
   try {
     const response = await fetch(url, options);
