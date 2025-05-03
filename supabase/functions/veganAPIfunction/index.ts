@@ -8,6 +8,9 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 import { corsHeaders } from "../_shared/cors.ts";
 
+
+//I Think this API / Edge function is not used!
+
 //API keys for the vegan API
 const apiKeyVegan = Deno.env.get("API_KEY_VEGAN");
 const apiHostVegan = Deno.env.get("API_HOST_VEGAN");
