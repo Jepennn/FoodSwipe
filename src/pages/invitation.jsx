@@ -1,17 +1,29 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import { useAcceptInvitation } from "@/hooks/useAcceptInvite";
 
 export function Invitation() {
     
     const { token } = useParams();
 
     // TODO: Implement server call and render appropriate component
-    const mockState = false ;
+
+    const { mutate, isPending, isError } = useAcceptInvitation();
+
+
+    useEffect(() => {
+        mutate(token);
+    }, []);
 
     return (
         <div className="h-screen bg-blue-500 flex items-center justify-center">
-            {mockState ? <SkeltonInvitation /> :
+
+            {isPending && <SkeltonInvitation />}
+
+            {isError && <ErrorInvitation />}
+
             <motion.div
                 initial={{ y: "-600px"}}
                 animate={{ y: ["-600px", "40px", "-20px", "0px"] }}
@@ -29,7 +41,6 @@ export function Invitation() {
             <button className="bg-blue-500 text-white px-4 py-2 rounded">Back to swipe</button>
             </div>
             </motion.div>
-            }
         </div>
     );
 } 
@@ -47,3 +58,11 @@ function SkeltonInvitation() {
         </div>
         );
 }
+
+//Error component
+function ErrorInvitation() {
+    return(
+        <div>Error in accepting the invitation</div>
+    )
+}
+    
