@@ -12,6 +12,9 @@ import { LoginPresenter } from "./Presenter/landingPagePresenter/loginPresenter.
 import { SignupPresenter } from "./Presenter/landingPagePresenter/signupPresenter.jsx";
 import { MainPresenter } from "./Presenter/landingPagePresenter/mainPresenter.jsx";
 
+// Pages components
+import { Invitation } from "@/pages/invitation.jsx";
+
 //import for protected routes
 import { Protect } from "./Utilities/protect.jsx";
 
@@ -89,6 +92,14 @@ export default function App() {
                 <SidebarPresenter />
                 <AiPresenter />
                 <SidebarViewRightButtonTopPresenter />
+              </Protect>
+            }
+          />
+          <Route
+            path="/invitation/accept/:token"
+            element={
+              <Protect>
+                <Invitation />
               </Protect>
             }
           />
