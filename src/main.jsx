@@ -10,12 +10,19 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TanstackProvider } from "@/lib/provider/tanstackConfig.jsx";
 import { Provider } from "react-redux";
 
+//Shadcn sidebar component
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "./components/appSidebar.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <TanstackProvider>
-        <App />
+        <SidebarProvider>
+          <AppSidebar/>
+          <SidebarTrigger/>
+          <App />
+        </SidebarProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </TanstackProvider>
     </Provider>

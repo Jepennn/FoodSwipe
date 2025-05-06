@@ -20,78 +20,66 @@ import { Protect } from "./Utilities/protect.jsx";
 
 //Imported components for routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import styles from "./App.module.css";
+
+//Sidebar components
+import { AppSidebar } from "@/components/appSidebar.jsx";
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className={styles.landing_page_container}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
                 <HeaderPresenter />
                 <MainPresenter />
-              </div>
+              </>
             }
           />
           <Route
             path="/login"
             element={
-              <div className={styles.landing_page_container}>
+              <>
                 <HeaderPresenter />
                 <LoginPresenter />
-              </div>
+              </>
             }
           />
           <Route
             path="/signup"
             element={
-              <div className={styles.landing_page_container}>
+              <>
                 <HeaderPresenter />
                 <SignupPresenter />
-              </div>
+              </>
             }
           />
           <Route
-            path="/recipeSwipe"
+            path="/swipe"
             element={
               <Protect>
-                <SidebarPresenter />
-                <CardHolderPresenter />
-                <SidebarViewRightButtonTopPresenter />
+                {/* <AppSidebar /> */}
+                {/* <CardHolderPresenter /> */}
               </Protect>
             }
           />
           <Route
-            path="/liked-recipes"
+            path="/liked"
             element={
               <Protect>
-                <SidebarPresenter />
+                {/* <AppSidebar /> */}
                 <LikedRecipePresenter />
-                <SidebarViewRightButtonTopPresenter />
               </Protect>
             }
           />
           <Route
-            path="/liked-recipes/:id"
+            path="/liked/:id"
             element={
               <Protect>
                 <MoreDetailsRecipePresenter />
-                <SidebarPresenter />
                 <LikedRecipePresenter />
-                <SidebarViewRightButtonTopPresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/recipeAI"
-            element={
-              <Protect>
-                <SidebarPresenter />
-                <AiPresenter />
-                <SidebarViewRightButtonTopPresenter />
               </Protect>
             }
           />
