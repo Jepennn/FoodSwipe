@@ -17,22 +17,22 @@ import { UserAvatar } from "@/components/userAvatar"
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
     title: "Liked",
-    url: "#",
+    url: "/liked",
     icon: Heart,
   },
   {
     title: "Collaboraters",
-    url: "#",
+    url: "/collaboraters",
     icon: BookUser,
   },
   {
     title: "Logout",
-    url: "#",
+    url: "/logout",
     icon: LogOut,
   },
 ]

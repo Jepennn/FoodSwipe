@@ -21,77 +21,72 @@ import { Protect } from "./Utilities/protect.jsx";
 //Imported components for routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-//Sidebar components
-import { AppSidebar } from "@/components/appSidebar.jsx";
-
 export default function App() {
   return (
     <>
       <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                <HeaderPresenter />
-                <MainPresenter />
-              </>
-            }
-          />
+        <Routes>
           <Route
-            path="/login"
+            path="/"
             element={
               <>
-                <HeaderPresenter />
-                <LoginPresenter />
-              </>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <>
-                <HeaderPresenter />
-                <SignupPresenter />
-              </>
-            }
-          />
-          <Route
-            path="/swipe"
-            element={
-              <Protect>
-                {/* <AppSidebar /> */}
-                {/* <CardHolderPresenter /> */}
-              </Protect>
-            }
-          />
-          <Route
-            path="/liked"
-            element={
-              <Protect>
-                {/* <AppSidebar /> */}
-                <LikedRecipePresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/liked/:id"
-            element={
-              <Protect>
-                <MoreDetailsRecipePresenter />
-                <LikedRecipePresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/invitation/accept/:token"
-            element={
-              <Protect>
-                <Invitation />
-              </Protect>
-            }
-          />
-        </Routes>
+              <HeaderPresenter />
+              <MainPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <HeaderPresenter />
+              <LoginPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <HeaderPresenter />
+              <SignupPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/swipe"
+          element={
+            <Protect>
+              {/* <CardHolderPresenter /> */}
+            </Protect>
+          }
+        />
+        <Route
+          path="/liked"
+          element={
+            <Protect>
+              <LikedRecipePresenter />
+            </Protect>
+          }
+        />
+        <Route
+          path="/liked/:id"
+          element={
+            <Protect>
+              <MoreDetailsRecipePresenter />
+              <LikedRecipePresenter />
+            </Protect>
+          }
+        />
+        <Route
+          path="/invitation/accept/:token"
+          element={
+            <Protect>
+              <Invitation />
+            </Protect>
+          }
+        />
+      </Routes>
       </BrowserRouter>
     </>
   );
