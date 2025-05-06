@@ -20,7 +20,6 @@ import { Protect } from "./Utilities/protect.jsx";
 
 //Imported components for routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import styles from "./App.module.css";
 
 export default function App() {
   return (
@@ -30,80 +29,64 @@ export default function App() {
           <Route
             path="/"
             element={
-              <div className={styles.landing_page_container}>
-                <HeaderPresenter />
-                <MainPresenter />
-              </div>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <div className={styles.landing_page_container}>
-                <HeaderPresenter />
-                <LoginPresenter />
-              </div>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <div className={styles.landing_page_container}>
-                <HeaderPresenter />
-                <SignupPresenter />
-              </div>
-            }
-          />
-          <Route
-            path="/recipeSwipe"
-            element={
-              <Protect>
-                <SidebarPresenter />
-                <CardHolderPresenter />
-                <SidebarViewRightButtonTopPresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/liked-recipes"
-            element={
-              <Protect>
-                <SidebarPresenter />
-                <LikedRecipePresenter />
-                <SidebarViewRightButtonTopPresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/liked-recipes/:id"
-            element={
-              <Protect>
-                <MoreDetailsRecipePresenter />
-                <SidebarPresenter />
-                <LikedRecipePresenter />
-                <SidebarViewRightButtonTopPresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/recipeAI"
-            element={
-              <Protect>
-                <SidebarPresenter />
-                <AiPresenter />
-                <SidebarViewRightButtonTopPresenter />
-              </Protect>
-            }
-          />
-          <Route
-            path="/invitation/accept/:token"
-            element={
-              <Protect>
-                <Invitation />
-              </Protect>
-            }
-          />
-        </Routes>
+              <>
+              <HeaderPresenter />
+              <MainPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <>
+              <HeaderPresenter />
+              <LoginPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <>
+              <HeaderPresenter />
+              <SignupPresenter />
+            </>
+          }
+        />
+        <Route
+          path="/swipe"
+          element={
+            <Protect>
+              {/* <CardHolderPresenter /> */}
+            </Protect>
+          }
+        />
+        <Route
+          path="/liked"
+          element={
+            <Protect>
+              <LikedRecipePresenter />
+            </Protect>
+          }
+        />
+        <Route
+          path="/liked/:id"
+          element={
+            <Protect>
+              <MoreDetailsRecipePresenter />
+              <LikedRecipePresenter />
+            </Protect>
+          }
+        />
+        <Route
+          path="/invitation/accept/:token"
+          element={
+            <Protect>
+              <Invitation />
+            </Protect>
+          }
+        />
+      </Routes>
       </BrowserRouter>
     </>
   );
