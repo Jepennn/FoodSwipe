@@ -14,13 +14,12 @@ import { Provider } from "react-redux";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/appSidebar.jsx";
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <TanstackProvider>
         <SidebarProvider>
-          <AppSidebar/>
-          <SidebarTrigger/>
           <App />
         </SidebarProvider>
         <ReactQueryDevtools initialIsOpen={false} />
@@ -28,3 +27,4 @@ createRoot(document.getElementById("root")).render(
     </Provider>
   </StrictMode>
 );
+

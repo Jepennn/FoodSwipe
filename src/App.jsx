@@ -1,92 +1,76 @@
-// import { HeaderPresenter } from "./Presenter/headerPresenter.jsx";
-import { SidebarPresenter } from "./Presenter/sidebarPresenter.jsx";
-import { CardHolderPresenter } from "./Presenter/cardHolderPresenter.jsx";
-import { SidebarViewRightButtonTopPresenter } from "./Presenter/sidebarViewRightButtonTopPresenter.jsx";
-import { MoreDetailsRecipePresenter } from "./Presenter/moreDetailsRecipePresenter.jsx";
-import { AiPresenter } from "./Presenter/aiPresenter.jsx";
-import { LikedRecipePresenter } from "./Presenter/likedRecipePresenter.jsx";
+
 
 //Components imported for landing page
-import { HeaderPresenter } from "./Presenter/landingPagePresenter/headerPresenter.jsx";
 import { LoginPresenter } from "./Presenter/landingPagePresenter/loginPresenter.jsx";
 import { SignupPresenter } from "./Presenter/landingPagePresenter/signupPresenter.jsx";
-import { MainPresenter } from "./Presenter/landingPagePresenter/mainPresenter.jsx";
 
 // Pages components
 import { Invitation } from "@/pages/invitation.jsx";
+import { Collaborate } from "@/pages/collaborate.jsx";
+import { Landing } from "@/pages/landing.jsx";
 
 //import for protected routes
 import { Protect } from "./Utilities/protect.jsx";
 
 //Imported components for routing
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+
+//Shadcn sidebar component
+import { AppSidebar } from "./components/appSidebar.jsx";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Divide } from "lucide-react";
+
+// Dashboard Layout Component
+const DashboardLayout = () => {
+  return (
+    <>
+      <AppSidebar />
+      <SidebarTrigger />
+      <Outlet /> {/* This will render the child routes */}
+    </>
+  );
+};
+
+// Landing Page Component
+const LandingPage = () => {
+  return (
+    <>
+      <LoginPresenter />
+    </>
+  );
+};
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
+          {/* Landing page route */}
+          <Route path="/" element={<LandingPage />} />
+          
+          {/* Dashboard routes with sidebar */}
+          <Route 
+            path="/dashboard" 
             element={
-              <>
-              <HeaderPresenter />
-              <MainPresenter />
-            </>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <>
-              <HeaderPresenter />
-              <LoginPresenter />
-            </>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <>
-              <HeaderPresenter />
-              <SignupPresenter />
-            </>
-          }
-        />
-        <Route
-          path="/swipe"
-          element={
-            <Protect>
-              {/* <CardHolderPresenter /> */}
-            </Protect>
-          }
-        />
-        <Route
-          path="/liked"
-          element={
-            <Protect>
-              <LikedRecipePresenter />
-            </Protect>
-          }
-        />
-        <Route
-          path="/liked/:id"
-          element={
-            <Protect>
-              <MoreDetailsRecipePresenter />
-              <LikedRecipePresenter />
-            </Protect>
-          }
-        />
-        <Route
-          path="/invitation/accept/:token"
-          element={
-            <Protect>
-              <Invitation />
-            </Protect>
-          }
-        />
-      </Routes>
+              <Protect>
+                <DashboardLayout />
+              </Protect>
+            }
+          >
+            {/* Dashboard index route - redirects to swipe */}
+            <Route index element={<Navigate to="/dashboard/swipe" replace />} />
+            
+            {/* Nested dashboard routes */}
+            <Route path="swipe" element={<div>Swipe</div>} />
+            <Route path="collaborate" element={<Collaborate />} />
+            <Route path="swipe/liked" element={<div>Liked</div>} />
+            <Route path="swipe/liked/:id" element={<div>More Details</div>} />
+          </Route>
+          
+          {/* Public route for invitation */}
+          <Route path="/invitation/accept/:token" element={<Invitation />} />
+          
+        </Routes>
       </BrowserRouter>
     </>
   );

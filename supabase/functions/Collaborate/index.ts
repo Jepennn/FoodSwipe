@@ -1,28 +1,45 @@
-             
-             
+
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { corsHeaders } from "../_shared/cors.ts";
 
 Deno.serve(async (req: Request) => {
 
   const API_KEY_RESEND = Deno.env.get("API_KEY_RESEND");
 
+  //Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, {
+      headers: {
+        ...corsHeaders
+      },
+      status: 204,
+    });
+  }
+
   //Method POST is the only allowed method
   if (req.method === 'POST') {
-    const { fromEmail, toEmail } = await req.json();
+    const { toEmail } = await req.json();
 
 
-    if (!fromEmail || !toEmail) {
+    if (!toEmail) {
       return new Response(JSON.stringify({ error: 'Both email addresses are required.' }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type':'application/json',
+          ...corsHeaders,
+         },
         status: 400,
       });
     }
 
-    const authHeader = req.headers.get('Authorization');
+    const authHeader = req.headers.get('Authorization').replace('Bearer ', '');
+    console.log(authHeader);
     if (!authHeader) {
       return new Response(JSON.stringify({ error: 'Missing Authorization header' }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type':'application/json',
+          ...corsHeaders,
+         },
         status: 401,
       });
     }
@@ -32,7 +49,7 @@ Deno.serve(async (req: Request) => {
       Deno.env.get('SUPABASE_ANON_KEY')!,
       {
         global: {
-          headers: { Authorization: authHeader } //Passing the Authorization header(users-jwt-token) to the Supabase client so we can get the user id from a specific user
+          headers: { Authorization: "Bearer " + authHeader } //Passing the Authorization header(users-jwt-token) to the Supabase client so we can get the user id from a specific user
         }
       }
     );
@@ -40,7 +57,10 @@ Deno.serve(async (req: Request) => {
     const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
     if (userError || !user) {
       return new Response(JSON.stringify({ error: 'Unauthorized user' }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type':'application/json',
+          ...corsHeaders,
+         },
         status: 401,
       });
     }
@@ -52,7 +72,7 @@ Deno.serve(async (req: Request) => {
       .insert([
         {
           from_user_id: user.id,
-          from_email: fromEmail,
+          from_email: "test@test.com",
           to_email: toEmail,
           status: 'pending',
           token: invitationToken,
@@ -62,7 +82,10 @@ Deno.serve(async (req: Request) => {
 
     if (error) {
       return new Response(JSON.stringify({ error: error.message, message: 'Failed to with client' }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type':'application/json',
+          ...corsHeaders,
+         },
         status: 500,
       });
     }
@@ -81,7 +104,7 @@ Deno.serve(async (req: Request) => {
           subject: 'Invitation to collaborate',
           html: `<div>
           <h1>Invitation to collaborate</h1>
-          <p>You have been invited to collaborate with ${fromEmail}</p>
+          <p>You have been invited to collaborate with ${user.email}</p>
           <p>Click <a href=${`http://localhost:5173/invitation/accept/${invitationToken}`}>here</a> to accept the invitation</p>
           </div>`,
       }),
@@ -89,20 +112,29 @@ Deno.serve(async (req: Request) => {
 
     if (emailError) {
       return new Response(JSON.stringify({ error: emailError.message }), {
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type':'application/json',
+          ...corsHeaders,
+         },
         status: 500,
       });
     }
 
     return new Response(JSON.stringify({ message: 'Invitation sent successfully!' }), {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type':'application/json',
+        ...corsHeaders,
+       },
       status: 200,
     });
   }
 
   //Method not allowed - only POST is allowed
   return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {  
+      'Content-Type':'application/json',
+      ...corsHeaders,
+     },
     status: 405,
   });
 });
