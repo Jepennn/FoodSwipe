@@ -1,5 +1,7 @@
 import * as React from "react"
 
+//This i hooks is imported with the sidebar component
+
 const MOBILE_BREAKPOINT = 768
 
 export function useIsMobile() {

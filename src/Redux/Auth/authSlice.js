@@ -11,14 +11,23 @@ const initialState = {
   first_name: null,
   last_name: null,
   email: null,
-  loading: false,
-  error: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action) => {
+      state.isAuth = true;
+      state.userId = action.payload.id;
+      state.email = action.payload.email;
+    },
+    resetUser: (state) => {
+      state.isAuth = false;
+      state.userId = null;
+      state.email = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //Create User thunk reducers
@@ -54,24 +63,9 @@ const authSlice = createSlice({
         state.email = null;
         state.error = action.payload;
       })
-      //Logout User thunk reducers
-      .addCase(logoutUserThunk.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(logoutUserThunk.fulfilled, (state) => {
-        state.isAuth = false;
-        state.userId = null;
-        state.email = null;
-        state.first_name = null;
-        state.last_name = null;
-        state.loading = false;
-      })
-      .addCase(logoutUserThunk.rejected, (state, action) => {
-        state.error = action.payload;
-        state.loading = false;
-      });
   },
 });
 
 export default authSlice.reducer;
+export const { setUser, resetUser } = authSlice.actions;
+
