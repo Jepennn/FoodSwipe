@@ -12,7 +12,7 @@ export function LoginPresenter() {
   //If user is logged/loggs in redirect to recipeSwipe page
   useEffect(() => {
     if (isAuth) {
-      navigate("/recipeSwipe");
+      navigate("/dashboard");
     }
   }, [isAuth, navigate]);
 

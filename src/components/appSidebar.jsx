@@ -11,33 +11,48 @@ import {
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar"
+
+
 import { UserAvatar } from "@/components/userAvatar"
+import { useLogoutUser } from "@/hooks/useLogoutUser"
+
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "/",
+    url: "/dashboard/swipe",
     icon: Home,
   },
   {
     title: "Liked",
-    url: "/liked",
+    url: "/dashboard/swipe/liked",
     icon: Heart,
   },
   {
     title: "Collaboraters",
-    url: "/collaboraters",
+    url: "/dashboard/collaborate",
     icon: BookUser,
   },
   {
     title: "Logout",
-    url: "/logout",
+    url: "/dashboard",
     icon: LogOut,
   },
 ]
 
+
+
 export function AppSidebar() {
+
+  const { mutate } = useLogoutUser();
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    mutate();
+  } 
+
+
   return (
     <Sidebar variant="floating" collapsible="icon">
       <SidebarContent>
@@ -51,7 +66,7 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={item.title === "Home"}>
-                    <a href={item.url}>
+                    <a href={item.url} onClick={item.title === "Logout" ? handleLogout : null }>
                       <item.icon />
                       <span>{item.title}</span>
                     </a>
