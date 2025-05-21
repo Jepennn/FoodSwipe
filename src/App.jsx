@@ -8,6 +8,7 @@ import { SignupPresenter } from "./Presenter/landingPagePresenter/signupPresente
 import { Invitation } from "@/pages/invitation.jsx";
 import { Collaborate } from "@/pages/collaborate.jsx";
 import { Landing } from "@/pages/landing.jsx";
+import { Swipe } from "@/pages/swipe.jsx";
 
 //import for protected routes
 import { Protect } from "./Utilities/protect.jsx";
@@ -61,7 +62,7 @@ export default function App() {
             <Route index element={<Navigate to="/dashboard/swipe" replace />} />
             
             {/* Nested dashboard routes */}
-            <Route path="swipe" element={<div>Swipe</div>} />
+            <Route path="swipe" element={<Swipe />} />
             <Route path="collaborate" element={<Collaborate />} />
             <Route path="swipe/liked" element={<div>Liked</div>} />
             <Route path="swipe/liked/:id" element={<div>More Details</div>} />
