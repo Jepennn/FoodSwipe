@@ -9,6 +9,7 @@ import { Invitation } from "@/pages/invitation.jsx";
 import { Collaborate } from "@/pages/collaborate.jsx";
 import { Landing } from "@/pages/landing.jsx";
 import { Swipe } from "@/pages/swipe.jsx";
+import { AllRecipes } from "@/pages/allRecipes.jsx";
 
 //import for protected routes
 import { Protect } from "./Utilities/protect.jsx";
@@ -66,6 +67,7 @@ export default function App() {
             <Route path="collaborate" element={<Collaborate />} />
             <Route path="swipe/liked" element={<div>Liked</div>} />
             <Route path="swipe/liked/:id" element={<div>More Details</div>} />
+            <Route path="recipes" element={<AllRecipes />} />
           </Route>
           
           {/* Public route for invitation */}

@@ -1,4 +1,4 @@
-import { Home, Inbox, Settings, Heart, LogOut,  BookUser} from "lucide-react"
+import { Home, Inbox, Settings, Heart, LogOut,  BookUser, BookOpen, Book } from "lucide-react"
 
 import {
   Sidebar,
@@ -28,6 +28,16 @@ const items = [
     title: "Liked",
     url: "/dashboard/swipe/liked",
     icon: Heart,
+  },
+  {
+    title: "Recipes",
+    url: "/dashboard/recipes",
+    icon: BookOpen,
+  },
+  {
+    title: "Collections",
+    url: "/dashboard/collections",
+    icon: Book,
   },
   {
     title: "Collaboraters",
