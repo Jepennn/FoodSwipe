@@ -1,4 +1,3 @@
-
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { corsHeaders } from "../_shared/cors.ts";
@@ -19,62 +18,70 @@ Deno.serve(async (req) => {
         });
     }
 
- 
     if (req.method === 'POST') {
 
         const body = await req.json();
-        
-        //Check if token is provided else return error
+        const { token, inviter_user_id } = body;
+
+        // Kontrollera att nödvändiga fält finns
         if (!token) {
             return new Response(JSON.stringify({ error: 'Token is required' }), {
                 headers: { 'Content-Type': 'application/json', ...corsHeaders },
                 status: 400,
             });
+        } else if (!inviter_user_id) {
+            return new Response(JSON.stringify({ error: 'Inviter user id is required' }), {
+                headers: { 'Content-Type': 'application/json', ...corsHeaders },
+                status: 400,
+            });
         }
 
-        console.log('SUPABASE_URL:', Deno.env.get('SUPABASE_URL'));
-console.log('SUPABASE_ANON_KEY:', Deno.env.get('SUPABASE_ANON_KEY'));
+        const authHeader = req.headers.get('Authorization')?.replace('Bearer ', '');
+
+        if (!authHeader) {
+            return new Response(JSON.stringify({ error: 'Authorization header missing' }), {
+                headers: { 'Content-Type': 'application/json', ...corsHeaders },
+                status: 401,
+            });
+        }
 
         const supabaseClient = createClient(
             Deno.env.get('SUPABASE_URL')!,
             Deno.env.get('SUPABASE_ANON_KEY')!,
+            {
+                global: {
+                    headers: { Authorization: "Bearer " + authHeader }
+                }
+            }
         );
 
-        const { data, error } = await supabaseClient
-            .from('invitation')
-            .select()
-            .eq('token', token)
-            .single();
+        const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+        if (userError || !user) {
+            return new Response(JSON.stringify({ error: 'Unauthorized user' }), {
+                headers: { 'Content-Type': 'application/json', ...corsHeaders },
+                status: 401,
+            });
+        }
 
-        //Check if invitation token exists else return error
-        if (error) {
-            return new Response(JSON.stringify({ error: error.message, message: 'Failed to find invite token' }), {
+        // Anropa databasfunktionen med RPC
+        const { error: rpcError } = await supabaseClient.rpc('accept_invitation_transaction', {
+            invitation_token: token,
+            inviter_user_id: inviter_user_id,
+            accepter_user_id: user.id
+        });
+
+        if (rpcError) {
+            console.error("Error accepting invitation:", rpcError);
+            return new Response(JSON.stringify({ error: rpcError.message, message: 'Transaction failed' }), {
                 headers: { 'Content-Type': 'application/json', ...corsHeaders },
                 status: 500,
             });
-        } 
-
-        //If invitation token exists update status to accepted
-         if (data) {
-            const { data: updatedData, error: updatedError } = await supabaseClient
-            .from('invitation')
-            .update({ status: 'accepted' })
-            .eq('token', token)
-            .single();
-
-            //Check if invitation token exists else return error
-            if (updatedError) {
-                return new Response(JSON.stringify({ error: updatedError.message, message: 'Failed to accept verfiy token' }), {
-                    headers: { 'Content-Type': 'application/json', ...corsHeaders },
-                    status: 500,
-                });
-            }
-            
-            return new Response(JSON.stringify({ message: 'Invitation accepted successfully!' }), {
-                headers: { 'Content-Type': 'application/json', ...corsHeaders },
-                status: 200,
-            }); 
         }
+
+        return new Response(JSON.stringify({ message: 'Invitation accepted successfully!' }), {
+            headers: { 'Content-Type': 'application/json', ...corsHeaders },
+            status: 200,
+        });
     }
     
     //This edge function only handles posts methods
@@ -85,7 +92,3 @@ console.log('SUPABASE_ANON_KEY:', Deno.env.get('SUPABASE_ANON_KEY'));
         });
     }
 });
-
-
-    
-

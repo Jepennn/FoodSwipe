@@ -8,14 +8,13 @@ export function Collaborate() {
   const { mutate, isPending, isError, error } = useInviteByEmail();
   const [email, setEmail] = useState("");
 
+  //TODO: Implement logic to handle if the email invitation fails and also confirmation if the email was sent successfully
 
   const handleInvite = () => {
-
-    //Todo: Implement email validation
-
+    //TODO: Implement email validation so the user is not entering a crazy email?
+    mutate(email);
     console.log(email);
     setEmail("");
-    mutate(email);
   }
 
   return (

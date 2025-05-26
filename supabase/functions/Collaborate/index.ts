@@ -19,8 +19,8 @@ Deno.serve(async (req: Request) => {
 
   //Method POST is the only allowed method
   if (req.method === 'POST') {
-    const { toEmail } = await req.json();
 
+    const { toEmail } = await req.json();
 
     if (!toEmail) {
       return new Response(JSON.stringify({ error: 'Both email addresses are required.' }), {
@@ -33,7 +33,7 @@ Deno.serve(async (req: Request) => {
     }
 
     const authHeader = req.headers.get('Authorization').replace('Bearer ', '');
-    console.log(authHeader);
+
     if (!authHeader) {
       return new Response(JSON.stringify({ error: 'Missing Authorization header' }), {
         headers: { 
@@ -90,7 +90,7 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    // TODO: Implement email sending wth resend here
+    // TODO: Implement email sending with resend here
 
     const { data: emailData, error: emailError } = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -105,7 +105,7 @@ Deno.serve(async (req: Request) => {
           html: `<div>
           <h1>Invitation to collaborate</h1>
           <p>You have been invited to collaborate with ${user.email}</p>
-          <p>Click <a href=${`http://localhost:5173/invitation/accept/${invitationToken}`}>here</a> to accept the invitation</p>
+          <p>Click <a href=${`http://localhost:5173/invitation/accept/${invitationToken}?id=${user.id}`}>here</a> to accept the invitation</p>
           </div>`,
       }),
     });
