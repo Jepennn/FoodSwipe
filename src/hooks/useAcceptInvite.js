@@ -9,6 +9,8 @@ export function useAcceptInvitation() {
 
         //TODD: Invalidate collaboration profile query (Not existing yet)
         onSuccess: () => {
+
+            //TODO: Implement logic in database to connect the users accounts in the database
             console.log("Invitation accepted");
         },
         onError: (error) => {

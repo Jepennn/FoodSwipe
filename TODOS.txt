@@ -1,0 +1,1 @@
+1. Implement so the user is sendig it's user id in query params as well and not just the token
