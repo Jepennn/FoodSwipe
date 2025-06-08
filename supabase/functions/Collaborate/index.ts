@@ -72,7 +72,7 @@ Deno.serve(async (req: Request) => {
       .insert([
         {
           from_user_id: user.id,
-          from_email: "test@test.com",
+          from_email: user.email,
           to_email: toEmail,
           status: 'pending',
           token: invitationToken,
